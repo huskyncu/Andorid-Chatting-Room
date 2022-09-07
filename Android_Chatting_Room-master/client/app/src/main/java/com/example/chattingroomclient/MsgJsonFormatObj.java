@@ -72,11 +72,11 @@ public class MsgJsonFormatObj {
     public List<String> getmemberList() {
         return _memberList;
     }
-
+    /*
     public void set_memberList(List<String> memberList) {
         this._memberList = memberList;
     }
-
+    */
     public void set_memberList(JSONArray memberList) throws JSONException {
         List<String> result = new ArrayList<String>();
         for(int i =0;i<memberList.length();i++){

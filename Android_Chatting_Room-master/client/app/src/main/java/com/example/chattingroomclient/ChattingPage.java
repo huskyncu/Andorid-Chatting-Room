@@ -72,7 +72,7 @@ public class ChattingPage extends AppCompatActivity {
         server_ip = bundle.getString("ip");
         server_port = bundle.getString("port");
         tv_welcome_msg.setText("Hi! " + name);
-
+        /*
         mMainHandler = new Handler(Looper.myLooper()) {
             Context _package;
 
@@ -93,7 +93,7 @@ public class ChattingPage extends AppCompatActivity {
                 _package = pac;
                 return this;
             }
-        }.init(this);
+        }.init(this);*/
 
         connect(this);
 
@@ -110,9 +110,11 @@ public class ChattingPage extends AppCompatActivity {
                             SendingMsg(_serverSocket, msgObj);
                             if (clientSocketThread.isAlive()) {
                                 clientSocketThread.interrupt();
+                                //中斷監聽
                             }
                             if (serverSocket.isConnected()) {
                                 serverSocket.close();
+                                //關掉socket
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -121,7 +123,7 @@ public class ChattingPage extends AppCompatActivity {
                 });
                 sendThread.start();
                 while (sendThread.isAlive()) {
-
+                    //do nothing
                 }
                 try {
                     Intent it = new Intent();
@@ -205,6 +207,7 @@ public class ChattingPage extends AppCompatActivity {
 
         netThread.start();
         while (netThread.isAlive()) {
+            //do nothing
         }
     }
 
@@ -216,12 +219,14 @@ public class ChattingPage extends AppCompatActivity {
                     try {
                         if (!ShowMsg()) {
                             break;
+                            //聊天室還在線
                         }
                     } catch (Exception ex) {
                         System.out.println("Error: " + ex.getMessage());
                         break;
                     }
                 }
+                //聊天室不在線要做這些事情。
                 if (clientSocketThread.isAlive()) {
                     clientSocketThread.interrupt();
                 }
@@ -257,11 +262,8 @@ public class ChattingPage extends AppCompatActivity {
 
             MsgJsonFormatObj hostMsg = jsonObjToMsgObj(jsonObject);
             if (hostMsg != null && hostMsg.isAlive()) {
-//                Message msg = Message.obtain();
-//                msg.what = 0;
-//                msg.obj = hostMsg;
-                //mMainHandler.sendMessage(msg);
                 runOnUiThread(new Runnable() {
+                    //不用handler就要用這個。
                     MsgJsonFormatObj _hostMsg;
                     @Override
                     public void run() {
@@ -278,11 +280,14 @@ public class ChattingPage extends AppCompatActivity {
 
                 if (hostMsg.get_id().equals("")) {
                     return false;
+                    //不在線，回傳false給第220行的thread。
                 }
                 return true;
+                //在線，回傳true給第220行的thread。
             } else {
                 msgObj.set_isAlive(false);
                 SendingMsg(serverSocket, msgObj);
+
                 return false;
             }
         } catch (Exception e) {

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/download/Android_Chatting_Room-master/Android_Chatting_Room-master/client/app/src/main/res/layout/activity_chatting_page.xml" value="0.1" />
         <entry key="..\:/download/Android_Chatting_Room-master/Android_Chatting_Room-master/client/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/download/Android_Chatting_Room-master/Android_Chatting_Room-master/client/app/src/main/res/layout/msg_box.xml" value="0.1" />
       </map>
     </option>
   </component>

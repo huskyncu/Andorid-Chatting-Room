@@ -7,7 +7,6 @@
     tools:context=".ChattingPage">
 
 
-
     <TextView
         android:id="@+id/tv_chatting_page_welcome_msg"
         android:layout_width="246dp"
